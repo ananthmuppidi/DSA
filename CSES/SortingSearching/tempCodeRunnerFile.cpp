@@ -1,0 +1,1 @@
+cout << applicants[i] << " " <<  apartments[j] << " " << ans << " " << i << " " << j << " ";
