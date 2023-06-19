@@ -4,27 +4,44 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, int> map;
-        for(auto str : strs){
-            vector<int> signature(26, 0); // length, base value
-            for(auto &j : str) signature[j - '0']++;
-            cout << generateKey(signature) << endl;
-            
+        unordered_map<string, vector<string>> map;
+        for(auto &str : strs){
+            map[generateKey(str)].push_back(str);
         }
-        
+        vector<vector<string>> ans;
+        for(auto i : map){
+            vector<string> temp;
+            for(auto j: i.second){
+                temp.push_back(j);
+            }
+            ans.push_back(temp);
+        }
+
+        return ans;
+    
     }
 
-    string generateKey(vector<int> arr){
-        string res = "";
-        for(int i = 0; i < arr.size(); i++){
-            res.append(string(arr[i], 1));
+    string generateKey(string s){
+        vector<int> arr(26, 0);
+        for(auto c : s){
+            // cout << c - '0' << endl;
+            arr[c - 'a']++;
         }
+        string res = "";
+        for(auto c : arr){
+            res = res + to_string(c) + ".";
+        }
+        return res;
     }
+    
 };
 
 int main() {
 
     Solution solver;
+    vector<string> strs;
+    strs.push_back("abs");
+    solver.groupAnagrams(strs);
     
     
 }

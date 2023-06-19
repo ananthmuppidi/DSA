@@ -6,9 +6,8 @@ public:
     bool containsDuplicate(vector<int>& nums) {
         unordered_set<int> set;
         for(auto &i : nums) {
-            // pair<unordered_set<int>::iterator, bool>  temp =  set.insert(i);
-            if(set.insert(i).second) return true;
-            // if(!temp.second) return true;
+            auto temp =  set.insert(i);
+            if(!temp.second) return true;
         }
         return false;
     }
